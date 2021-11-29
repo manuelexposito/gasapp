@@ -8,6 +8,9 @@ import { MaterialImportsModule } from './modules/material-imports.module';
 import { HttpClientModule } from '@angular/common/http';
 import { GasolineraListComponent } from './pages/gasolinera-list/gasolinera-list.component';
 import { GasolineraItemComponent } from './components/gasolinera-item/gasolinera-item.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,11 @@ import { GasolineraItemComponent } from './components/gasolinera-item/gasolinera
   ],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxSliderModule,
     MaterialImportsModule,
     HttpClientModule
   ],

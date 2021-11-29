@@ -39,3 +39,19 @@ export interface Gasolinera {
     idProvincia:                    string;
     idccaa:                         string;
 }
+
+export interface Provincia {
+  IDPovincia: string;
+  IDCCAA:     string;
+  Provincia:  string;
+  CCAA:       string;
+}
+
+export interface Municipio {
+  IDMunicipio: string;
+  IDProvincia: string;
+  IDCCAA:      string;
+  Municipio:   string;
+  Provincia:   string;
+  CCAA:        string;
+}

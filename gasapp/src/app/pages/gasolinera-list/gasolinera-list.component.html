@@ -1,1 +1,64 @@
-<app-gasolinera-item *ngFor="let g of allGasolineras" [gasolineraInput]="g"></app-gasolinera-item>
+<div fxLayout="row wrap" fxLayoutGap="10px grid" fxLayoutAlign="center center">
+  <!--FILTROS-->
+  <div class="filtros">
+    <div class="filtro-columna" >
+      <mat-form-field appearance="fill">
+        <mat-label>Provincias</mat-label>
+        <mat-select [formControl]="provinciaForm" multiple>
+          <mat-option *ngFor="let p of provincias" [value]="p.IDPovincia" (onSelectionChange)="contadorProvinciasSelected(p.IDPovincia)">{{
+            p.Provincia
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!--TODO : arreglar que aparezca la caja cuando se selecciona UNA provincia-->
+      <form class="example-form" *ngIf="contadorProvinciasSelected('') == 1">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Municipio</mat-label>
+          <input
+            [disabled]="disableForm.value"
+            type="text"
+            placeholder="Pick one"
+            aria-label="Number"
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+
+    <div class="filtro-columna" >
+
+
+      <!--TIPOS DE CARBURANTE-->
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de carburante</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let c of carburante" [value]="c.value">
+            {{ c.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!--PRECIO-->
+      <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="sliderOptions"></ngx-slider>
+
+    </div>
+  </div>
+  <!------------->
+
+  <!--
+  <app-gasolinera-item
+    *ngFor="let g of allGasolineras"
+    [gasolineraInput]="g"
+    fxFlex="60"
+  ></app-gasolinera-item>-->
+</div>
