@@ -20,6 +20,8 @@ export class GasolineraListComponent implements OnInit {
         // this.allGasolineras = r.listaEESSPrecio;
       
         //TODO : TERMINAR DE REEMPLAZAR LAS VARIABLES QUE NECESITEMOS Y MEJORAR DISEÑO
+        
+        //TODO: Refactorizar todo este código en un método del SERVICIO
         let jsonString = JSON.stringify(r);
         let jsonStringReplaced = jsonString.replace(/Precio Gasoleo A/gi, 'precioGasoleoA')
                                             .replace(/ListaEESSPrecio/gi, 'listaEESSPrecio')
