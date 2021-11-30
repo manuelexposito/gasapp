@@ -1,5 +1,14 @@
-<mat-card>
-  <mat-card-header
-    ><h1>{{ gasolineraInput.rotulo }}</h1></mat-card-header>
-  <mat-card-subtitle>{{ gasolineraInput.direccion }}</mat-card-subtitle>
+<mat-card (click)="openDialog()" class="card">
+  <div>
+    <mat-card-header>
+      <h1>{{ gasolineraInput.rotulo }}</h1>
+    </mat-card-header>
+    <h3>{{gasolineraInput.provincia}}</h3>
+    <mat-card-subtitle>{{ gasolineraInput.direccion }} - {{gasolineraInput.cP}}</mat-card-subtitle>
+  </div>
+
+  <!--TODO : Implementar el mapa de Google maps-->
+    <img class="mapa-prov" src="https://images.indianexpress.com/2017/05/google-maps-759.jpg">
+
+
 </mat-card>

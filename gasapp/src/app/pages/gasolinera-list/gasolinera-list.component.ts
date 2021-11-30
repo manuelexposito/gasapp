@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Provincia } from './../../interfaces/gasolinera';
+import { Municipio, Provincia } from './../../interfaces/gasolinera';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
@@ -10,6 +10,7 @@ import { GasolineraService } from 'src/app/services/gasolinera.service';
 
 import {map, startWith} from 'rxjs/operators';
 import { LabelType, Options } from '@angular-slider/ngx-slider';
+import { GasolineraItemComponent } from 'src/app/components/gasolinera-item/gasolinera-item.component';
 
 interface Carburante {
   value: string;
@@ -52,8 +53,13 @@ export class GasolineraListComponent implements OnInit {
     {value: 'precioGasolina98E5', viewValue: 'Gasolina 98 E5'},
   ];
 
-  provinciaForm = new FormControl();
+  provinciaForm = new FormControl('');
   provincias: Provincia[] = [];
+
+  //Para comprobar el numero de provincias seleccionadas
+  selectedProvincias : Provincia [] = [];
+  //--------
+
 
   allGasolineras: Gasolinera[] = [];
 
@@ -63,34 +69,24 @@ export class GasolineraListComponent implements OnInit {
 
   //Autocompletado
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
+  municipiosNombres !: string[];
   filteredOptions!: Observable<string[]>;
-  disableForm = new FormControl(true);
+  disableForm = new FormControl({disabled : true});
 
   constructor(private gasolineraService: GasolineraService) {}
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.municipiosNombres.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  contadorProvinciasSelected(provincia : string) : number{
-
-    let array : string [] = [];
-    if(provincia != ''){
-
-      array.push(provincia)
-      return array.length;
-
-    } else return array.length;
-
-  }
 
   ngOnInit(): void {
+    
     this.getProvincias();
     this.getGasolineraList();
-
+    this.filterByProvincias()
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
@@ -99,6 +95,34 @@ export class GasolineraListComponent implements OnInit {
 
   }
 
+
+  filterByProvincias(){
+
+    this.filteredList = this.allGasolineras
+
+    if(this.provinciaForm.value.length == 1){
+      this.disableForm.setValue(false)
+     
+    } else{
+      this.disableForm.setValue(true)
+    } 
+
+
+    if(this.provinciaForm.value.length >= 1){
+      this.filteredList = this.allGasolineras.filter(gasolinera => this.provinciaForm.value.includes(gasolinera.provincia))
+    } else{
+
+      this.filteredList = this.allGasolineras
+    }
+
+
+    // this.filteredList = this.allGasolineras.filter(gasolinera => idProvincias.includes(gasolinera.idProvincia))
+    console.log(this.provinciaForm.value) 
+    
+    return this.filteredList
+   
+      
+  }
 
 
   getProvincias(){
@@ -113,16 +137,26 @@ export class GasolineraListComponent implements OnInit {
   }
 
   getMunicipios(idProvincia : string){
+    
+      this.gasolineraService.getMunicipios(idProvincia).subscribe(
 
+        r => {r.forEach(
+
+          x => this.municipiosNombres.push(x.Municipio)
+          
+        )
+        console.log(this.municipiosNombres)}
+      )
+      
   }
 
   getGasolineraList(){
 
     this.gasolineraService.getGasolineras().subscribe((r) => {
-
+      
       let jsonToString = JSON.stringify(r);
-      this.allGasolineras =
-        this.gasolineraService.parseStringToJson(jsonToString).listaEESSPrecio;
+      this.allGasolineras = this.gasolineraService.parseStringToJson(jsonToString).listaEESSPrecio;
+       this.filteredList = this.allGasolineras;
     });
   }
 

@@ -43,6 +43,9 @@ parseStringToJson(string : String){
                                 .replace(/Precio Gasolina 98 E5/gi, 'precioGasolina98E5')
                                 .replace(/IDMunicipio/gi, 'idMunicipio')
                                 .replace(/IDProvincia/gi, 'idProvincia')
+                                .replace(/Municipio/gi, 'municipio')
+                                .replace(/Provincia/gi, 'provincia')
+                                .replace(/C\.P\./gi, 'cP')
 
 
 

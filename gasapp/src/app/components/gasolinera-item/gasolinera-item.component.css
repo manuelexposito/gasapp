@@ -1,0 +1,13 @@
+.card{
+    display: flex;
+    cursor:pointer;
+    justify-content: space-between;
+}
+
+.mapa-prov{
+
+    object-fit: cover;
+    border-radius: 10px;
+    width: 650px;
+    height: 100px;
+}

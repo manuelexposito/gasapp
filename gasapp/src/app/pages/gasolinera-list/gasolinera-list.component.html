@@ -2,20 +2,23 @@
   <!--FILTROS-->
   <div class="filtros">
     <div class="filtro-columna" >
+      <mat-card-subtitle>Por provincia</mat-card-subtitle>
       <mat-form-field appearance="fill">
         <mat-label>Provincias</mat-label>
-        <mat-select [formControl]="provinciaForm" multiple>
-          <mat-option *ngFor="let p of provincias" [value]="p.IDPovincia" (onSelectionChange)="contadorProvinciasSelected(p.IDPovincia)">{{
+        <mat-select [formControl]="provinciaForm" multiple (selectionChange)="filterByProvincias()">
+        
+          <mat-option *ngFor="let p of provincias"  [value]="p.Provincia">{{
             p.Provincia
           }}</mat-option>
         </mat-select>
       </mat-form-field>
       <!--TODO : arreglar que aparezca la caja cuando se selecciona UNA provincia-->
-      <form class="example-form" *ngIf="contadorProvinciasSelected('') == 1">
+  
+      <form class="example-form" *ngIf="provinciaForm.value.length == 1" >
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Municipio</mat-label>
           <input
-            [disabled]="disableForm.value"
+          [attr.disabled]="disableForm.value"
             type="text"
             placeholder="Pick one"
             aria-label="Number"
@@ -24,11 +27,11 @@
             [matAutocomplete]="auto"
           />
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option
-              *ngFor="let option of filteredOptions | async"
-              [value]="option"
+            <mat-option (onSelectionChange)="getMunicipios(provinciaForm.value[0])"
+              *ngFor="let municipio of municipiosNombres"
+              [value]="municipio" 
             >
-              {{ option }}
+              {{ municipio }}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -37,7 +40,7 @@
 
     <div class="filtro-columna" >
 
-
+      <mat-card-subtitle>Por precio</mat-card-subtitle>
       <!--TIPOS DE CARBURANTE-->
       <mat-form-field appearance="fill">
         <mat-label>Tipo de carburante</mat-label>
@@ -55,10 +58,13 @@
   </div>
   <!------------->
 
-  <!--
+  <!---->
+  <br>
+  <mat-spinner *ngIf="filteredList.length == 0"></mat-spinner>
+
   <app-gasolinera-item
-    *ngFor="let g of allGasolineras"
+    *ngFor="let g of filteredList"
     [gasolineraInput]="g"
     fxFlex="60"
-  ></app-gasolinera-item>-->
+  ></app-gasolinera-item>
 </div>
