@@ -1,10 +1,11 @@
 <mat-card (click)="openDialog()" class="card">
-  <div>
+  <div style=" min-width: 200px;">
     <mat-card-header>
-      <h1>{{ gasolineraInput.rotulo }}</h1>
+      <h1 class="text-ellipsis">{{ gasolineraInput.rotulo }}</h1>
     </mat-card-header>
-    <h3>{{gasolineraInput.provincia}}</h3>
-    <mat-card-subtitle>{{ gasolineraInput.direccion }} - {{gasolineraInput.cP}}</mat-card-subtitle>
+    <h3 class="text-ellipsis">{{gasolineraInput.provincia}}</h3>
+    <mat-card-subtitle >
+      <p class="text-ellipsis">{{ gasolineraInput.direccion }}</p></mat-card-subtitle>
   </div>
 
   <!--TODO : Implementar el mapa de Google maps-->

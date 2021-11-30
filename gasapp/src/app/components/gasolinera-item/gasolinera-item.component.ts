@@ -21,6 +21,7 @@ export class GasolineraItemComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(DialogGasolineraDetailComponentComponent, {
+      width: '500px',
       data: this.gasolineraInput
     });
   }

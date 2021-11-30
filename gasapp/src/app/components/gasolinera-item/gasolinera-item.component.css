@@ -2,12 +2,21 @@
     display: flex;
     cursor:pointer;
     justify-content: space-between;
+    width: 800px;
 }
 
 .mapa-prov{
 
     object-fit: cover;
     border-radius: 10px;
-    width: 650px;
-    height: 100px;
+    min-width: 550px;
+    height: 150px;
+}
+
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
 }

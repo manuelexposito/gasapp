@@ -34,6 +34,7 @@ parseStringToJson(string : String){
   let jsonStringReplaced = string.replace(/Precio Gasoleo A/gi, 'precioGasoleoA')
                                 .replace(/ListaEESSPrecio/gi, 'listaEESSPrecio')
                                 .replace(/Dirección/gi, 'direccion')
+                                .replace(/Horario/gi, 'horario')
                                 .replace(/Rótulo/gi, 'rotulo')
                                 .replace(/Precio Gasoleo B/gi, 'precioGasoleoB' )
                                 .replace(/Tipo venta/gi, 'tipoVenta' )

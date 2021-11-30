@@ -1,0 +1,7 @@
+.precios > div{
+
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    justify-content: space-between;
+}

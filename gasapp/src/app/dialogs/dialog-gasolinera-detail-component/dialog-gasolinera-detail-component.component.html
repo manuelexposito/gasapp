@@ -1,1 +1,36 @@
-<h1>{{data.rotulo}}</h1>
+<h1>{{ gasolinera.rotulo }}</h1>
+<mat-divider></mat-divider>
+<h1><strong>Ubicación</strong></h1>
+<h4>{{gasolinera.provincia}}</h4>
+<h4>{{gasolinera.municipio}}</h4>
+<h4>{{gasolinera.direccion}}</h4>
+<h4>{{gasolinera.cP}}</h4>
+<h4>{{gasolinera.horario}}</h4>
+<mat-divider></mat-divider>
+<div class="precios">
+  <h1><strong>Precios</strong>:</h1>
+  <div>
+    <h3>Gasoleo A:</h3>
+    <h3>{{ gasolinera.precioGasoleoA }}</h3>
+  </div>
+  <div>
+    <h3>Gasoleo B:</h3>
+    <h3>{{ gasolinera.precioGasoleoB }}</h3>
+  </div>
+  <div>
+    <h3>Gasolina 95 E10</h3>
+    <h3>{{ gasolinera.precioGasolina95E10 }}</h3>
+  </div>
+  <div>
+    <h3>Gasolina 95 E5</h3>
+    <h3>{{ gasolinera.precioGasolina95E5 }}</h3>
+  </div>
+  <div>
+    <h3>Gasolina 98 E10</h3>
+    <h3>{{ gasolinera.precioGasolina98E10 }}</h3>
+  </div>
+  <div>
+    <h3>Gasolina 98 E10</h3>
+    <h3>{{ gasolinera.precioGasolina98E5 }}</h3>
+  </div>
+</div>
