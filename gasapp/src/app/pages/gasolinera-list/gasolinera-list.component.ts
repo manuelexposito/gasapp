@@ -93,7 +93,6 @@ export class GasolineraListComponent implements OnInit {
 
   filterByPrecio() {
   
-    let listaActual = this.filteredList
     //TODO: Averiguar por qué no funciona este filtrado que compara entre dos valores.
     if (this.carburanteForm.value == 'precioGasoleoA') {
 
