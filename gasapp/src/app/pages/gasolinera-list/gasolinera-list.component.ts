@@ -40,12 +40,12 @@ export class GasolineraListComponent implements OnInit {
         case LabelType.High:
           return `<b>Máximo:</b> ${value}€`;
         default:
-          return `${value}€` ;
+          return `${value}€`;
       }
     },
   };
 
-  carburanteBoolean : boolean = false;
+  carburanteBoolean: boolean = false;
   carburante: Carburante[] = [
     { value: 'precioGasoleoA', viewValue: 'Gasoleo A' },
     { value: 'precioGasoleoB', viewValue: 'Gasoleo B' },
@@ -64,11 +64,11 @@ export class GasolineraListComponent implements OnInit {
 
   //Autocompletado
   myControl = new FormControl();
-  municipios : Municipio[] = [];
+  municipios: Municipio[] = [];
   filteredOptions!: Observable<string[]>;
   disableForm = new FormControl({ disabled: true });
 
-  constructor(private gasolineraService: GasolineraService) {}
+  constructor(private gasolineraService: GasolineraService) { }
 
   /*
   private _filter(value: string): string[] {
@@ -87,31 +87,33 @@ export class GasolineraListComponent implements OnInit {
 
   }
 
+  // allGasolineras --> lista predeterminada
+  // filteredList --> lista con filtros
+  // listaActual --> lista actual con los filtros aplicados
 
-
-
-  filterByPrecio(){
-
-
+  filterByPrecio() {
+  
+    let listaActual = this.filteredList
     //TODO: Averiguar por qué no funciona este filtrado que compara entre dos valores.
-    if(this.carburanteForm.value == 'precioGasoleoA'){
+    if (this.carburanteForm.value == 'precioGasoleoA') {
 
-      let nuevaLista = this.filteredList.filter((gasolinera) =>{
+      let nuevaLista = this.filteredList.filter(gasolinera => {
 
-        let precioGasA = parseFloat(gasolinera.precioGasoleoA.replace(',', '.'));
-
-          precioGasA >= this.minValue
-          &&   precioGasA <= this.maxValue
-
+        let precioGasA = Number.parseFloat(gasolinera.precioGasoleoA.replace(',', '.'));
+       // console.log(precioGasA)
+        return  precioGasA >= this.minValue && precioGasA <= this.maxValue
+        
       }
 
       );
       console.log(`${this.minValue} : ${this.maxValue}`)
-      console.log(nuevaLista)
+
       this.filteredList = nuevaLista
+      console.log(this.filteredList)
       return this.filteredList;
     }
 
+    
     return this.filteredList
   }
 
@@ -158,7 +160,7 @@ export class GasolineraListComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );*/
-      return this.municipios;
+    return this.municipios;
 
   }
 
