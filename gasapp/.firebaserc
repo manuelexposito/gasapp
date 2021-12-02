@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gasapp-c541f": {
+      "hosting": {
+        "gasapp": [
+          "gasapp-c541f"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gasapp-c541f"
+  }
+}

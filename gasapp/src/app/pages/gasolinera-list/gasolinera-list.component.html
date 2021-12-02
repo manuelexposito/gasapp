@@ -71,8 +71,8 @@
   <mat-spinner *ngIf="filteredList.length == 0"></mat-spinner>
 
   <app-gasolinera-item
-    *ngFor="let g of filteredList"
+    *ngFor="let g of filteredList | slice:0:50;"
     [gasolineraInput]="g"
-    fxFlex="60"
+    fxFlex="60" 
   ></app-gasolinera-item>
 </div>
