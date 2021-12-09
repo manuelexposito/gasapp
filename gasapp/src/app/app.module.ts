@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './modules/app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialImportsModule } from './modules/material-imports.module';
@@ -17,13 +17,26 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
+import { SignUpComponent } from './components/shared/sign-up/sign-up.component';
+import { SignInComponent } from './components/shared/sign-in/sign-in.component';
+import { ForgotPasswordComponent } from './components/shared/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/shared/verify-email/verify-email.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule, USE_DEVICE_LANGUAGE, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
 @NgModule({
   declarations: [
     AppComponent,
     GasolineraListComponent,
     GasolineraItemComponent,
-    DialogGasolineraDetailComponentComponent
+    DialogGasolineraDetailComponentComponent,
+    DashboardComponent,
+    SignUpComponent,
+    SignInComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +48,9 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     NgxSliderModule,
     MaterialImportsModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireAuthGuardModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

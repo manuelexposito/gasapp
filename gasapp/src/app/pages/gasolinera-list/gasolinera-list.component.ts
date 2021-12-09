@@ -11,6 +11,7 @@ import { GasolineraService } from 'src/app/services/gasolinera.service';
 import { map, startWith } from 'rxjs/operators';
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { GasolineraItemComponent } from 'src/app/components/gasolinera-item/gasolinera-item.component';
+import { SignInComponent } from 'src/app/components/shared/sign-in/sign-in.component';
 
 interface Carburante {
   value: string;
