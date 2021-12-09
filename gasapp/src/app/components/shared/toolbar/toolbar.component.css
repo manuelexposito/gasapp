@@ -5,3 +5,11 @@
 a{
   color: white; text-decoration: none
 }
+
+.menu-btn{
+
+  display: flex;
+  flex-direction: row;
+  justify-items: baseline;
+
+}

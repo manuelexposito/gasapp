@@ -23,10 +23,12 @@ export class AuthService {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then( r => {
       this.firestore.collection('usuarios').doc(r?.user?.uid)
       .set({ name : r.user?.displayName,
-            email : r.user?.email});
+            email : r.user?.email,
+            photoURL : r.user?.photoURL});
 
             localStorage.setItem('name', r.user?.displayName? r.user?.displayName: ' ');
             localStorage.setItem('email', r.user?.email? r.user?.email: ' ');
+            localStorage.setItem('photoUrl', r.user?.photoURL? r.user?.photoURL: ' ');
             this.router.navigate(['/gasolineras'])
           })
 
@@ -41,5 +43,11 @@ export class AuthService {
   getUserName(){
 
     return localStorage.getItem('name')
+  }
+
+  getUserImage(){
+
+    return localStorage.getItem('photoUrl')
+
   }
 }

@@ -17,7 +17,7 @@ import { trace } from 'console';
 })
 export class GasolineraItemComponent implements OnInit {
 
-  //public readonly testDocValue$ !: Observable<any>;
+
 
 
 @Input() gasolineraInput !: Gasolinera;
