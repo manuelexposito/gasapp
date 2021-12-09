@@ -1,0 +1,5 @@
+
+<app-gasolinera-item class="lista-gasolineras"
+*ngFor="let g of listaGasolineras | slice:0:50;"
+[gasolineraInput]="g"
+></app-gasolinera-item>

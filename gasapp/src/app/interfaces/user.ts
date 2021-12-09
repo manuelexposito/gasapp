@@ -1,4 +1,3 @@
-import { Gasolinera } from "./gasolinera";
 
 export interface User {
     uid: string;
@@ -6,5 +5,13 @@ export interface User {
     displayName: string;
     photoURL: string;
     emailVerified: boolean;
-    favGasolineras : Gasolinera[]
+ }
+
+
+
+ export interface FavoriteGas {
+
+  id : string;
+  fav : boolean;
+
  }

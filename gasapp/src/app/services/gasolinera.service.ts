@@ -47,6 +47,7 @@ parseStringToJson(string : String){
                                 .replace(/Municipio/gi, 'municipio')
                                 .replace(/Provincia/gi, 'provincia')
                                 .replace(/C\.P\./gi, 'cP')
+                                .replace(/IDEESS/gi, 'ideess')
 
 
 

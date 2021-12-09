@@ -17,26 +17,27 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
+
 import { SignUpComponent } from './components/shared/sign-up/sign-up.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
-import { ForgotPasswordComponent } from './components/shared/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './components/shared/verify-email/verify-email.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule, USE_DEVICE_LANGUAGE, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
+import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
+import { GasolinerasFavoritasComponent } from './components/gasolineras-favoritas/gasolineras-favoritas.component';
 @NgModule({
   declarations: [
     AppComponent,
     GasolineraListComponent,
     GasolineraItemComponent,
     DialogGasolineraDetailComponentComponent,
-    DashboardComponent,
     SignUpComponent,
     SignInComponent,
-    ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    ToolbarComponent,
+    GasolinerasFavoritasComponent
   ],
   imports: [
     BrowserModule,

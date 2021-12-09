@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+
+  <a [routerLink]='["/gasolineras"]'><span>GasApp</span></a>
+  <span class="example-spacer"></span>
+  <div *ngIf="userName">
+
+    <button mat-button [matMenuTriggerFor]="menu"> {{ userName }}</button>
+    <mat-menu #menu="matMenu">
+     <a [routerLink]="['/gasolinerasFav']"> <button mat-menu-item>Mis gasolineras favoritas</button></a>
+    </mat-menu>
+  </div>
+  <div *ngIf="!userName">
+    <a routerLink="/"
+      ><button mat-button>Iniciar sesión</button></a
+    >
+  </div>
+</mat-toolbar>

@@ -1,14 +1,15 @@
-<mat-card (click)="openDialog()" class="card">
-  <div style=" min-width: 200px;">
+<mat-card  class="card">
+  <button mat-icon-button color="warn" (click)="addFav()" style="align-self:flex-end;">
+    <mat-icon>favorite_border</mat-icon>
+  </button>
+  <div style=" min-width: 200px;" (click)="openDialog()">
     <mat-card-header>
       <h1 class="text-ellipsis">{{ gasolineraInput.rotulo }}</h1>
     </mat-card-header>
     <h3 class="text-ellipsis">{{gasolineraInput.provincia}}</h3>
     <mat-card-subtitle >
       <p class="text-ellipsis">{{ gasolineraInput.direccion }}</p></mat-card-subtitle>
-      <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
+
   </div>
 
   <!--TODO : Implementar el mapa de Google maps-->
