@@ -1,3 +1,4 @@
+import { FavoriteGas } from './../../interfaces/user';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -7,46 +8,125 @@ import { DialogGasolineraDetailComponentComponent } from 'src/app/dialogs/dialog
 import { Gasolinera } from 'src/app/interfaces/gasolinera';
 import { GasolineraService } from 'src/app/services/gasolinera.service';
 
-
+import { query, where } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import { trace } from 'console';
 @Component({
   selector: 'app-gasolinera-item',
   templateUrl: './gasolinera-item.component.html',
-  styleUrls: ['./gasolinera-item.component.css']
+  styleUrls: ['./gasolinera-item.component.css'],
 })
 export class GasolineraItemComponent implements OnInit {
+  @Input() gasolineraInput!: Gasolinera;
 
+  constructor(
+    public dialog: MatDialog,
+    public auth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) {}
 
-
-
-@Input() gasolineraInput !: Gasolinera;
-
-  constructor(public dialog: MatDialog,
-    public auth : AngularFireAuth,
-    private firestore : AngularFirestore,) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openDialog() {
     this.dialog.open(DialogGasolineraDetailComponentComponent, {
       width: '500px',
-      data: this.gasolineraInput
+      data: this.gasolineraInput,
     });
   }
-
+  /*
   addFav(){
 
+    let collectionFavGas = this.firestore.collection('favGasolineras')
     let gas : Gasolinera = this.gasolineraInput
+    let idsGasolineras : string [] = [];
+    this.firestore.collection<FavoriteGas>('/favGasolineras').valueChanges().subscribe(
 
-    this.firestore.collection('favGasolineras')
-      .doc(gas.ideess)
-        .set({
-          id : gas.ideess,
-          fav : true
-        })
+      r => {r.forEach( x => idsGasolineras.push(x.id))
 
+        if(!idsGasolineras.includes(gas.ideess)){
+          collectionFavGas
+          .doc()
+            .set({
+              id : gas.ideess,
+              userId : localStorage.getItem('uid'),
+              fav : true
+            })
+
+          } else if(idsGasolineras.includes(gas.ideess)){
+
+          let index = idsGasolineras.indexOf(gas.ideess)
+          delete idsGasolineras[index]
+           collectionFavGas.ref.where("id", "==", gas.ideess).get().then(
+
+            (r) => r.forEach( d => d.ref.delete())
+           )
+
+
+          }
+        }
+
+
+
+    )
+
+
+    }
+    */
+
+  addFav() {
+    let collectionFavGas = this.firestore.collection('favGasolineras');
+    let gas: Gasolinera = this.gasolineraInput;
+    let idsGasolineras: string[] = [];
+    this.firestore
+      .collection<FavoriteGas>('/favGasolineras')
+      .valueChanges()
+      .subscribe((r) => {
+        r.forEach((x) => idsGasolineras.push(x.id));
+
+        collectionFavGas.doc().set({
+          id: gas.ideess,
+          userId: localStorage.getItem('uid'),
+          fav: true,
+        });
+      });
+      return true
+  }
+
+  removeFav() {
+    let collectionFavGas = this.firestore.collection('favGasolineras');
+    let gas: Gasolinera = this.gasolineraInput;
+    let idsGasolineras: string[] = [];
+    this.firestore
+      .collection<FavoriteGas>('/favGasolineras')
+      .valueChanges()
+      .subscribe((r) => {
+        r.forEach((x) => idsGasolineras.push(x.id));
+
+        let index = idsGasolineras.indexOf(gas.ideess);
+        delete idsGasolineras[index];
+        collectionFavGas.ref
+          .where('id', '==', gas.ideess)
+          .get()
+          .then((r) => r.forEach((d) => d.ref.delete()));
+      });
+      return false
+  }
+
+
+  checkIfFav(idGas : string) : boolean{
+
+    let collectionFavGas = this.firestore.collection('favGasolineras');
+    let idsGasolineras: string[] = [];
+
+    this.firestore
+      .collection<FavoriteGas>('/favGasolineras')
+      .valueChanges()
+      .subscribe((r) => {
+        r.forEach((x) => idsGasolineras.push(x.id));
       }
+      )
 
+    return idsGasolineras.includes(idGas) ? true : false
+
+  }
 }

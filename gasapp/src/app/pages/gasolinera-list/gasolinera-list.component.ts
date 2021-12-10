@@ -93,7 +93,7 @@ export class GasolineraListComponent implements OnInit {
   // listaActual --> lista actual con los filtros aplicados
 
   filterByPrecio() {
-  
+
     //TODO: Averiguar por qué no funciona este filtrado que compara entre dos valores.
     if (this.carburanteForm.value == 'precioGasoleoA') {
 
@@ -102,7 +102,7 @@ export class GasolineraListComponent implements OnInit {
         let precioGasA = Number.parseFloat(gasolinera.precioGasoleoA.replace(',', '.'));
        // console.log(precioGasA)
         return  precioGasA >= this.minValue && precioGasA <= this.maxValue
-        
+
       }
 
       );
@@ -113,7 +113,7 @@ export class GasolineraListComponent implements OnInit {
       return this.filteredList;
     }
 
-    
+
     return this.filteredList
   }
 

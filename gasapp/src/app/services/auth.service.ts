@@ -29,6 +29,7 @@ export class AuthService {
             localStorage.setItem('name', r.user?.displayName? r.user?.displayName: ' ');
             localStorage.setItem('email', r.user?.email? r.user?.email: ' ');
             localStorage.setItem('photoUrl', r.user?.photoURL? r.user?.photoURL: ' ');
+            localStorage.setItem('uid', r.user?.uid? r.user?.uid: ' ' )
             this.router.navigate(['/gasolineras'])
           })
 
@@ -36,7 +37,16 @@ export class AuthService {
 
   logout(){
 
-    this.auth.signOut();
+    this.auth.signOut().then(
+
+      () => {
+        localStorage.removeItem('name')
+        localStorage.removeItem('email')
+        localStorage.removeItem('photoUrl')
+        localStorage.removeItem('uid')
+
+      }
+    );
 
   }
 

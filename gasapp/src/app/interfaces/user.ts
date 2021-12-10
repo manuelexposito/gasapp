@@ -12,6 +12,7 @@ export interface User {
  export interface FavoriteGas {
 
   id : string;
+  idUsuario : string;
   fav : boolean;
 
  }
