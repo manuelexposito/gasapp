@@ -5,13 +5,14 @@ export interface User {
     displayName: string;
     photoURL: string;
     emailVerified: boolean;
- }
+}
 
 
 
- export interface FavoriteGas {
+export interface FavoriteGas {
 
-  id : string;
-  fav : boolean;
+    userId: string
+    idGasolineras: string[];
+  
 
- }
+}

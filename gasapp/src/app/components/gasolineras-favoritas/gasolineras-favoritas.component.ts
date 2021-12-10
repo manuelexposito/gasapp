@@ -27,7 +27,8 @@ export class GasolinerasFavoritasComponent implements OnInit {
 
 
   getGasolinerasFavoritas(){
-
+    //TODO : REHACER ESTO
+/*
     let idsGasolineras : string [] = [];
 
     this.firestore.collection<FavoriteGas>('/favGasolineras').valueChanges().subscribe(
@@ -52,7 +53,7 @@ export class GasolinerasFavoritasComponent implements OnInit {
     )
 
 
-
+*/
 
   }
 

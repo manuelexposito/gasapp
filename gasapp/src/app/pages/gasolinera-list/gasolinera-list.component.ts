@@ -12,6 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { GasolineraItemComponent } from 'src/app/components/gasolinera-item/gasolinera-item.component';
 import { SignInComponent } from 'src/app/components/shared/sign-in/sign-in.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface Carburante {
   value: string;
@@ -87,6 +88,8 @@ export class GasolineraListComponent implements OnInit {
 
 
   }
+
+  
 
   // allGasolineras --> lista predeterminada
   // filteredList --> lista con filtros

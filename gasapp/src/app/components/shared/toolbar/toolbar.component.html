@@ -13,7 +13,8 @@
     </button>
     <mat-menu #menu="matMenu">
       <a [routerLink]="['/gasolinerasFav']">
-        <button mat-menu-item>Mis gasolineras favoritas</button></a
+        <button mat-menu-item>Mis gasolineras favoritas</button></a>
+        <button mat-menu-item (click)="logout()">Cerrar sesión</button>
       >
     </mat-menu>
   </div>
