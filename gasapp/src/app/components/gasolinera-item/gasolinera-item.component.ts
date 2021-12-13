@@ -11,6 +11,7 @@ import { GasolineraService } from 'src/app/services/gasolinera.service';
 import { query, where } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import { trace } from 'console';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-gasolinera-item',
   templateUrl: './gasolinera-item.component.html',
@@ -22,7 +23,8 @@ export class GasolineraItemComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public auth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private authService : AuthService
   ) {}
 
   ngOnInit(): void {}
@@ -33,6 +35,25 @@ export class GasolineraItemComponent implements OnInit {
       data: this.gasolineraInput,
     });
   }
+
+
+  addFav(){
+    //las promesas se tratan con "then" y tienen que devolverse con RETURN
+    this.authService.addFav(this.gasolineraInput).then(
+
+      r => {
+
+      }
+
+    )
+  }
+
+  removeFav(){
+
+    this.authService.removeFav(this.gasolineraInput.ideess)
+  }
+
+
   /*
   addFav(){
 
@@ -71,7 +92,7 @@ export class GasolineraItemComponent implements OnInit {
 
 
     }
-    */
+ 
 
   addFav() {
     let collectionFavGas = this.firestore.collection('favGasolineras');
@@ -129,4 +150,5 @@ export class GasolineraItemComponent implements OnInit {
     return idsGasolineras.includes(idGas) ? true : false
 
   }
+     */
 }

@@ -55,3 +55,14 @@ export interface Municipio {
   Provincia:   string;
   CCAA:        string;
 }
+
+
+export interface GasolineraFavFirebase{
+
+  direccion : string;
+  id:         string;
+  rotulo:     string;
+  uid:        string;
+
+
+}

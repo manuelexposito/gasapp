@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable, NgZone } from '@angular/core';
 
 import firebase from 'firebase/compat/app';
+import { Gasolinera } from '../interfaces/gasolinera';
 @Injectable({
   providedIn: 'root'
 })
@@ -60,4 +61,34 @@ export class AuthService {
     return localStorage.getItem('photoUrl')
 
   }
+
+
+  addFav(gas : Gasolinera){
+    let userId = localStorage.getItem('uid');
+    //las promesas se tratan con "then" y tienen que devolverse con RETURN
+   return this.firestore.collection(`usuarios/${userId}/favorites`).doc(gas.ideess).set({
+
+      id: gas.ideess,
+      rotulo : gas.rotulo,
+      direccion : gas.direccion,
+      uid : localStorage.getItem('uid')
+
+    })
+
+  }
+
+  removeFav(docId : string){
+
+    let userId = localStorage.getItem('uid');
+    this.firestore.collection(`usuarios/${userId}/favorites`).doc(docId).delete();
+
+
+  }
+
+
+getFavorites(){
+  let userId = localStorage.getItem('uid');
+  return this.firestore.collection(`usuarios/${userId}/favorites`).valueChanges();
+}
+
 }
