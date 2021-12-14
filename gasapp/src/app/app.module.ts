@@ -27,6 +27,7 @@ import { AngularFireAuthModule, USE_DEVICE_LANGUAGE, USE_EMULATOR as USE_AUTH_EM
 import { AngularFireAuthGuardModule } from '@angular/fire/compat/auth-guard';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { GasolinerasFavoritasComponent } from './components/gasolineras-favoritas/gasolineras-favoritas.component';
+import { ListDialogComponent } from './components/shared/list-dialog/list-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { GasolinerasFavoritasComponent } from './components/gasolineras-favorita
     SignInComponent,
     VerifyEmailComponent,
     ToolbarComponent,
-    GasolinerasFavoritasComponent
+    GasolinerasFavoritasComponent,
+    ListDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<form [formGroup]="listasForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Favorite food</mat-label>
+        <mat-select formControlName="idLista">
+          <mat-option *ngFor="let l of listas" [value]="l.id" >
+            {{l.data.nombreLista}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <mat-form-field>
+        <mat-label></mat-label>
+        <input matInput placeholder="Just a placeholder" formControlName="nombreLista">
+    </mat-form-field>
+    <button mat-raised-button (click)="addToList()" mat-dialog-close>Crear lista</button>
+</form>

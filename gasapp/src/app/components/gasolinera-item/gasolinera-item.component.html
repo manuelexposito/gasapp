@@ -1,19 +1,26 @@
-<mat-card  class="card">
-  <button mat-icon-button color="warn" (click)="addFav()" style="align-self:flex-end;">
-    <mat-icon >favorite_border</mat-icon>
-  </button>
-  <div style=" min-width: 200px;" (click)="openDialog()">
-    <mat-card-header>
-      <h1 class="text-ellipsis">{{ gasolineraInput.rotulo }}</h1>
-    </mat-card-header>
-    <h3 class="text-ellipsis">{{gasolineraInput.provincia}}</h3>
-    <mat-card-subtitle >
-      <p class="text-ellipsis">{{ gasolineraInput.direccion }}</p></mat-card-subtitle>
+<mat-card style="display: flex; flex-direction: column;">
+  <div style="display: flex;">
 
-  </div>
+    <div style=" min-width: 200px;" (click)="openDialog()">
+      <mat-card-header>
+        <h1 class="text-ellipsis">{{ gasolineraInput.rotulo }}</h1>
+      </mat-card-header>
+      <h3 class="text-ellipsis">{{gasolineraInput.provincia}}</h3>
+      <mat-card-subtitle>
+        <p class="text-ellipsis">{{ gasolineraInput.direccion }}</p>
+      </mat-card-subtitle>
 
-  <!--TODO : Implementar el mapa de Google maps-->
+    </div>
+
+    <!--TODO : Implementar el mapa de Google maps-->
     <img class="mapa-prov" src="https://images.indianexpress.com/2017/05/google-maps-759.jpg">
-
-
+  </div>
+  <div>
+    <button mat-icon-button color="warn" (click)="addFav()" style="align-self:flex-end;">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <button mat-raised-button (click)="openListDialog()">Añadir a una lista</button>
+  
+  </div>
+ 
 </mat-card>

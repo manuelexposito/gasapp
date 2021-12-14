@@ -1,13 +1,23 @@
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable, NgZone } from '@angular/core';
 
 import firebase from 'firebase/compat/app';
 import { Gasolinera } from '../interfaces/gasolinera';
+import { Lista, ListaData } from '../interfaces/lista.interface';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+
+const USER_ID = localStorage.getItem('uid');
+
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class AuthService {
 
   userData: any;
@@ -64,9 +74,9 @@ export class AuthService {
 
 
   addFav(gas : Gasolinera){
-    let userId = localStorage.getItem('uid');
+   
     //las promesas se tratan con "then" y tienen que devolverse con RETURN
-   return this.firestore.collection(`usuarios/${userId}/favorites`).doc(gas.ideess).set({
+   return this.firestore.collection(`usuarios/${USER_ID}/favorites`).doc(gas.ideess).set({
 
       id: gas.ideess,
       rotulo : gas.rotulo,
@@ -79,16 +89,70 @@ export class AuthService {
 
   removeFav(docId : string){
 
-    let userId = localStorage.getItem('uid');
-    this.firestore.collection(`usuarios/${userId}/favorites`).doc(docId).delete();
+   
+    this.firestore.collection(`usuarios/${USER_ID}/favorites`).doc(docId).delete();
 
 
   }
 
 
+  addToNewList(nombreCollection : string, gas : Gasolinera){
+  
+    return this.firestore.collection(`usuarios/${USER_ID}/listas/`)
+    .add({
+      nombreLista : nombreCollection,
+      gasId : gas.ideess,
+      rotulo : gas.rotulo,
+      direccion : gas.direccion
+    })
+    
+  }
+
+  addToList(idLista : string, gas : Gasolinera){
+
+    return this.firestore.collection(`usuarios/${USER_ID}/listas/`)
+    .doc(idLista).set({
+      //TODO: Ver como poner de forma predeterminada el título de la lista viendo solo el nombre
+      nombreLista : this.firestore.collection(`usuarios/${USER_ID}/listas/`).doc(idLista),
+      gasId : gas.ideess,
+      rotulo : gas.rotulo,
+      direccion : gas.direccion
+    })
+
+  }
+
+  /*
+  private listas !: AngularFirestoreCollection<Lista>;
+  listaIds !: Observable<Lista[]>
+
+  addToList(gas : Gasolinera){
+
+    this.listas = this.firestore.collection<Lista>(`listaIds`)
+
+    return this.listas.snapshotChanges().pipe(
+      map((actions: any[]) => actions.map(r => {
+
+        const data = r.payload.doc.data() as Lista;
+        const id = r.payload.doc.id;
+        return {id, data};
+
+      }))
+
+    )
+
+  }
+  */
+
+  getListas() : AngularFirestoreCollection<ListaData>{
+   return this.firestore.collection(`usuarios/${USER_ID}/listas/`);
+    
+  }
+
+  
+
 getFavorites(){
-  let userId = localStorage.getItem('uid');
-  return this.firestore.collection(`usuarios/${userId}/favorites`).valueChanges();
+  
+  return this.firestore.collection(`usuarios/${USER_ID}/favorites`).valueChanges();
 }
 
 }

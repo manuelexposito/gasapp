@@ -12,6 +12,7 @@ import { query, where } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import { trace } from 'console';
 import { AuthService } from 'src/app/services/auth.service';
+import { ListDialogComponent } from '../shared/list-dialog/list-dialog.component';
 @Component({
   selector: 'app-gasolinera-item',
   templateUrl: './gasolinera-item.component.html',
@@ -24,7 +25,8 @@ export class GasolineraItemComponent implements OnInit {
     public dialog: MatDialog,
     public auth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private authService : AuthService
+    private authService : AuthService,
+    private listDialog : MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -33,6 +35,14 @@ export class GasolineraItemComponent implements OnInit {
     this.dialog.open(DialogGasolineraDetailComponentComponent, {
       width: '500px',
       data: this.gasolineraInput,
+    });
+  }
+
+  
+  openListDialog(): void {
+    const dialogRef = this.dialog.open(ListDialogComponent, {
+      width: '250px',
+      data : this.gasolineraInput
     });
   }
 
