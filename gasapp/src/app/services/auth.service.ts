@@ -1,3 +1,4 @@
+import { FavoriteGas } from './../interfaces/user';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -55,7 +56,6 @@ export class AuthService {
         localStorage.removeItem('email')
         localStorage.removeItem('photoUrl')
         localStorage.removeItem('uid')
-
       }
     );
 
@@ -74,7 +74,7 @@ export class AuthService {
 
 
   addFav(gas : Gasolinera){
-   
+
     //las promesas se tratan con "then" y tienen que devolverse con RETURN
    return this.firestore.collection(`usuarios/${USER_ID}/favorites`).doc(gas.ideess).set({
 
@@ -89,7 +89,7 @@ export class AuthService {
 
   removeFav(docId : string){
 
-   
+
     this.firestore.collection(`usuarios/${USER_ID}/favorites`).doc(docId).delete();
 
 
@@ -97,7 +97,7 @@ export class AuthService {
 
 
   addToNewList(nombreCollection : string, gas : Gasolinera){
-  
+
     return this.firestore.collection(`usuarios/${USER_ID}/listas/`)
     .add({
       nombreLista : nombreCollection,
@@ -105,7 +105,7 @@ export class AuthService {
       rotulo : gas.rotulo,
       direccion : gas.direccion
     })
-    
+
   }
 
   addToList(idLista : string, gas : Gasolinera){
@@ -145,14 +145,15 @@ export class AuthService {
 
   getListas() : AngularFirestoreCollection<ListaData>{
    return this.firestore.collection(`usuarios/${USER_ID}/listas/`);
-    
+
   }
 
-  
 
-getFavorites(){
-  
-  return this.firestore.collection(`usuarios/${USER_ID}/favorites`).valueChanges();
+
+getFavorites() : Observable<FavoriteGas[]>{
+
+  return this.firestore.collection<FavoriteGas>(`usuarios/${USER_ID}/favorites`).valueChanges();
+
 }
 
 }

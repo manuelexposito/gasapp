@@ -26,6 +26,7 @@ export class GasolineraItemComponent implements OnInit {
     public auth: AngularFireAuth,
     private firestore: AngularFirestore,
     private authService : AuthService,
+    private gasService : GasolineraService,
     private listDialog : MatDialog
   ) {}
 
@@ -38,7 +39,7 @@ export class GasolineraItemComponent implements OnInit {
     });
   }
 
-  
+
   openListDialog(): void {
     const dialogRef = this.dialog.open(ListDialogComponent, {
       width: '250px',
@@ -48,14 +49,8 @@ export class GasolineraItemComponent implements OnInit {
 
 
   addFav(){
-    //las promesas se tratan con "then" y tienen que devolverse con RETURN
-    this.authService.addFav(this.gasolineraInput).then(
 
-      r => {
-
-      }
-
-    )
+    this.authService.addFav(this.gasolineraInput)
   }
 
   removeFav(){
@@ -63,6 +58,20 @@ export class GasolineraItemComponent implements OnInit {
     this.authService.removeFav(this.gasolineraInput.ideess)
   }
 
+
+  checkIfFav() : boolean{
+
+    let gasFavListID !: string []
+    // this.listaGasolineras = this.listaGasolineras.filter( gasolinera => this.gasFavList.some( fav => gasolinera.ideess == fav.id))
+
+    this.authService.getFavorites().subscribe(
+      r => r.forEach( fav => gasFavListID.push(fav.id))
+
+    )
+
+    return gasFavListID.includes(this.gasolineraInput.ideess) ? true : false
+
+  }
 
   /*
   addFav(){
@@ -102,7 +111,7 @@ export class GasolineraItemComponent implements OnInit {
 
 
     }
- 
+
 
   addFav() {
     let collectionFavGas = this.firestore.collection('favGasolineras');

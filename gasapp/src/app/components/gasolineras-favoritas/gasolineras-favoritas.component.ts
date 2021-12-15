@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { FavoriteGas } from './../../interfaces/user';
 import { GasolineraService } from 'src/app/services/gasolinera.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -12,20 +13,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GasolinerasFavoritasComponent implements OnInit {
 
-  gasFavList !: Observable<FavoriteGas[]>
+  gasFavList !: FavoriteGas[]
   listaGasolineras !: Gasolinera[]
-  constructor(private firestore : AngularFirestore, private gasService : GasolineraService) { }
+  constructor(private firestore : AngularFirestore, private gasService : GasolineraService, private authService : AuthService) { }
 
   ngOnInit(): void {
 
 
 
-    this.gasFavList = this.firestore.collection<FavoriteGas>('/favGasolineras').valueChanges()
-    this.getGasolinerasFavoritas()
-    console.log(this.gasFavList)
+   this.getGasolinerasFavoritas().subscribe(
+     r => {
+      this.gasFavList = r
+      this.gasService.getGasolineras().subscribe(
+
+        r =>{
+          let jsonToString = JSON.stringify(r);
+          this.listaGasolineras =
+            this.gasService.parseStringToJson(jsonToString).listaEESSPrecio
+
+          this.listaGasolineras = this.listaGasolineras.filter( gasolinera => this.gasFavList.some( fav => gasolinera.ideess == fav.id))
+
+        }
+
+      )
+     }
+   )
+
   }
 
 
+
+  getGasolinerasFavoritas(){
+
+    return this.authService.getFavorites()
+
+  }
+
+
+/*
   getGasolinerasFavoritas(){
 
     let idsGasolineras : string [] = [];
@@ -50,11 +75,8 @@ export class GasolinerasFavoritasComponent implements OnInit {
       }
 
     )
-
+*/
 
 
 
   }
-
-
-}

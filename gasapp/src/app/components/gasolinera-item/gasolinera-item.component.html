@@ -17,10 +17,11 @@
   </div>
   <div>
     <button mat-icon-button color="warn" (click)="addFav()" style="align-self:flex-end;">
-      <mat-icon>favorite_border</mat-icon>
+     <!-- <mat-icon>{{ checkIfFav()? 'favorite' : 'favorite_border'}}</mat-icon>-->
+     <mat-icon>favorite</mat-icon>
     </button>
     <button mat-raised-button (click)="openListDialog()">Añadir a una lista</button>
-  
+
   </div>
- 
+
 </mat-card>
